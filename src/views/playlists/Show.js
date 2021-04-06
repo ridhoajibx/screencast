@@ -79,13 +79,13 @@ export default function Show() {
                                 <ul className="list-group list-group-flush">
                                     {lessons.map((lesson, index) => (
                                         <li key={index} className="list-group-item">
-                                            <a href="#" className="text-decoration-none text-dark d-flex align-items-center px-3">
+                                            <div className="text-decoration-none text-dark d-flex align-items-center px-3">
                                                 <i className="bi bi-play-circle-fill fs-2"></i>
                                                 <div className="ms-4">
                                                     {lesson.title}
                                                     <div style={{ fontSize: "13px" }} className="fw-medium text-secondary">Episode {lesson.episode}</div>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </li>
                                     ))
                                     }

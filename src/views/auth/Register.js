@@ -34,51 +34,53 @@ const Register = (props) => {
 
     return (
         <App title="Register">
-            <div className="row">
-                <div className="col-md-6 offset-md-3">
-                <Logo className="mb-4 d-flex justify-content-center align-items-center" />
-                    <div className="card">
-                        <div className="card-body px-4">
-                            <form onSubmit={submitHandler}>
-                                <div className="mb-3">
-                                    <label className="form-label" htmlFor="name">Name</label>
-                                    <input value={name} onChange={(e) => setName(e.target.value)} type="text" name="name" id="name" className="form-control" />
-                                    { errors.name && errors.name.map((error, i) =>(
-                                        <div className="text-danger mt-1" key={i}>
-                                            {error}
-                                        </div>
-                                    )) }
-                                </div>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-6 offset-md-3 py-4 mt-2">
+                        <Logo className="mb-4 d-flex justify-content-center align-items-center" />
+                        <div className="card shadow-lg">
+                            <div className="card-body px-4">
+                                <form onSubmit={submitHandler}>
+                                    <div className="mb-3">
+                                        <label className="form-label" htmlFor="name">Name</label>
+                                        <input value={name} onChange={(e) => setName(e.target.value)} type="text" name="name" id="name" className="form-control" />
+                                        {errors.name && errors.name.map((error, i) => (
+                                            <div className="text-danger mt-1" key={i}>
+                                                {error}
+                                            </div>
+                                        ))}
+                                    </div>
 
-                                <div className="mb-3">
-                                    <label className="form-label" htmlFor="email">Email</label>
-                                    <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className="form-control" />
-                                    { errors.email && errors.email.map((error, i) =>(
-                                        <div className="text-danger mt-1" key={i}>
-                                            {error}
-                                        </div>
-                                    )) }
-                                </div>
+                                    <div className="mb-3">
+                                        <label className="form-label" htmlFor="email">Email</label>
+                                        <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className="form-control" />
+                                        {errors.email && errors.email.map((error, i) => (
+                                            <div className="text-danger mt-1" key={i}>
+                                                {error}
+                                            </div>
+                                        ))}
+                                    </div>
 
-                                <div className="mb-3">
-                                    <label className="form-label" htmlFor="password">Password</label>
-                                    <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" className="form-control" />
-                                    { errors.password && errors.password.map((error, i) =>(
-                                        <div className="text-danger mt-1" key={i}>
-                                            {error}
-                                        </div>
-                                    )) }
-                                </div>
+                                    <div className="mb-3">
+                                        <label className="form-label" htmlFor="password">Password</label>
+                                        <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" className="form-control" />
+                                        {errors.password && errors.password.map((error, i) => (
+                                            <div className="text-danger mt-1" key={i}>
+                                                {error}
+                                            </div>
+                                        ))}
+                                    </div>
 
-                                <div className="mb-3">
-                                    <label className="form-label" htmlFor="confirmPassword">Confirm Password</label>
-                                    <input value={password_confirmation} onChange={(e) => setPasswordConfirmation(e.target.value)} type="password" name="confirmPassword" id="confirmPassword" className="form-control" />
-                                </div>
+                                    <div className="mb-3">
+                                        <label className="form-label" htmlFor="confirmPassword">Confirm Password</label>
+                                        <input value={password_confirmation} onChange={(e) => setPasswordConfirmation(e.target.value)} type="password" name="confirmPassword" id="confirmPassword" className="form-control" />
+                                    </div>
 
-                                <div className="d-flex justify-content-end">
-                                    <button className="btn btn-primary btn-sm px-4 py-2" type="submit">Register</button>
-                                </div>
-                            </form>
+                                    <div className="d-flex justify-content-end">
+                                        <button className="btn btn-primary btn-sm px-4 py-2" type="submit">Register</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

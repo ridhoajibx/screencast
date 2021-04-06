@@ -13,6 +13,7 @@ export default function index() {
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/series" component={Series.Index} />
+                <Route path="/series/:slug" component={Series.Show} />
                 <Route path="/login">
                     <Middleware.Guest render={<Login/>} />
                 </Route>

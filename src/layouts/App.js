@@ -7,9 +7,7 @@ export default function App(props) {
         <div>
             <Navigation />
             <main className="mt-5 py-4">
-                <div className="container mt-4">
-                    {props.children}
-                </div>
+                {props.children}
             </main>
         </div>
     )

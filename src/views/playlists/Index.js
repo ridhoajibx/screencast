@@ -32,7 +32,7 @@ export default function Index() {
                             <div className="card">
                                 <img className="card-img-top" src={playlist.thumbnail} alt={playlist.name} />
                                 <div className="card-body">
-                                    <a href="javascript.void(0)" className="text-decoration-none">
+                                    <a href="#" className="text-decoration-none">
                                         <h5>{playlist.name}</h5>
                                     </a>
                                     <div className="d-flex align-items-center justify-content-between">

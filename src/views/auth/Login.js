@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { useSetRecoilState } from 'recoil';
+import Logo from '../../components/Logo';
 import App from '../../layouts/App';
 import { authenticatedUser } from '../../store';
 
@@ -30,36 +31,37 @@ const Login = (props) => {
             setErrors(response.data.errors)
         }
     }
+
     return (
         <App title="login">
             <div className="row">
                 <div className="col-md-6 offset-md-3">
+                    <Logo className="mb-4 d-flex justify-content-center align-items-center" />
                     <div className="card">
-                        <div className="card-header text-uppercase">Login</div>
-                        <div className="card-body">
+                        <div className="card-body px-4">
                             <form onSubmit={submitHandler}>
                                 <div className="mb-3">
                                     <label className="form-label" htmlFor="email">Email</label>
                                     <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className="form-control" />
-                                    { errors.email && errors.email.map((error, i) =>(
+                                    {errors.email && errors.email.map((error, i) => (
                                         <div className="text-danger mt-1" key={i}>
                                             {error}
                                         </div>
-                                    )) }
+                                    ))}
                                 </div>
 
                                 <div className="mb-3">
                                     <label className="form-label" htmlFor="password">Password</label>
                                     <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" className="form-control" />
-                                    { errors.password && errors.password.map((error, i) =>(
+                                    {errors.password && errors.password.map((error, i) => (
                                         <div className="text-danger mt-1" key={i}>
                                             {error}
                                         </div>
-                                    )) }
+                                    ))}
                                 </div>
 
-                                <div className="d-grid gap-2 col-4 mx-auto">
-                                    <button className="btn btn-primary" type="submit">Login</button>
+                                <div className="d-flex justify-content-end">
+                                    <button className="btn btn-primary btn-sm px-4 py-2" type="submit">Login</button>
                                 </div>
                             </form>
                         </div>

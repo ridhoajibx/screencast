@@ -20,7 +20,7 @@ export default function Navigation() {
         }
     }
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom border-1">
+        <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom border-1">
             <div className="container py-2">
                 <NavLink exact to="/" className="navbar-brand">Screencast</NavLink>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,6 +30,9 @@ export default function Navigation() {
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
                             <NavLink exact to="/" className="nav-link">Home</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to="/series" className="nav-link">Series</NavLink>
                         </li>
 
                         {auth.check &&
@@ -46,8 +49,8 @@ export default function Navigation() {
                                     {auth.user.name}
                                 </div>
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li><div className="dropdown-item" href="#">Name</div></li>
-                                    <li><hr className="dropdown-divider" /></li>
+                                    <li><span className="dropdown-item">Account</span></li>
+                                    {/* <li><hr className="dropdown-divider" /></li> */}
                                     <li><button onClick={logoutHandler} className="dropdown-item">Logout</button></li>
                                 </ul>
                             </li>

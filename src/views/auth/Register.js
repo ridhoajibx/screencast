@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { useSetRecoilState } from 'recoil';
+import Logo from '../../components/Logo';
 import App from '../../layouts/App';
 import { authenticatedUser } from '../../store';
 
@@ -30,13 +31,14 @@ const Register = (props) => {
             console.log(response.data)
         }
     }
+
     return (
         <App title="Register">
             <div className="row">
                 <div className="col-md-6 offset-md-3">
+                <Logo className="mb-4 d-flex justify-content-center align-items-center" />
                     <div className="card">
-                        <div className="card-header text-uppercase">Register</div>
-                        <div className="card-body">
+                        <div className="card-body px-4">
                             <form onSubmit={submitHandler}>
                                 <div className="mb-3">
                                     <label className="form-label" htmlFor="name">Name</label>
@@ -73,8 +75,8 @@ const Register = (props) => {
                                     <input value={password_confirmation} onChange={(e) => setPasswordConfirmation(e.target.value)} type="password" name="confirmPassword" id="confirmPassword" className="form-control" />
                                 </div>
 
-                                <div className="d-grid gap-2 col-4 mx-auto">
-                                    <button className="btn btn-primary" type="submit">Register</button>
+                                <div className="d-flex justify-content-end">
+                                    <button className="btn btn-primary btn-sm px-4 py-2" type="submit">Register</button>
                                 </div>
                             </form>
                         </div>

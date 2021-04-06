@@ -5,12 +5,14 @@ import Register from '../views/auth/Register';
 import Dashboard from '../views/Dashboard';
 import Home from '../views/Home';
 import * as Middleware from '../middleware';
+import * as Series from '../views/playlists/App';
 
 export default function index() {
     return (
         <BrowserRouter>
             <Switch>
                 <Route exact path="/" component={Home} />
+                <Route exact path="/series" component={Series.Index} />
                 <Route path="/login">
                     <Middleware.Guest render={<Login/>} />
                 </Route>

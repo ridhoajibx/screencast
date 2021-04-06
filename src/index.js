@@ -1,14 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { RecoilRoot } from 'recoil';
+
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://localhost:8000'
+axios.defaults.withCredentials = true;
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <RecoilRoot>
+            <App />
+        </RecoilRoot>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

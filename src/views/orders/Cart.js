@@ -29,6 +29,11 @@ export default function Cart() {
         }
     }
 
+    const checkoutHandler = async () => {
+        let { data } = await axios.post('/api/order/create');
+        window.open(data.redirect_url);
+    }
+
     useEffect(() => {
         let price = (carts.map(cart => cart.price))
         setTotal(price.reduce((x, y) => x + y, 0))
@@ -76,7 +81,7 @@ export default function Cart() {
                                                 <td colSpan="2"></td>
                                                 <th className="text-end" scope="row">Rp {formatMoney(total)}</th>
                                                 <td className="text-end">
-                                                    <button className="btn btn-primary btn-sm">Checkout</button>
+                                                    <button onClick={ checkoutHandler } className="btn btn-primary btn-sm">Checkout</button>
                                                 </td>
                                             </tr>
                                         </tbody>

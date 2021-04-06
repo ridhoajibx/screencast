@@ -6,7 +6,8 @@ import Dashboard from '../views/Dashboard';
 import Home from '../views/Home';
 import * as Middleware from '../middleware';
 import * as Series from '../views/playlists/App';
-import Cart from '../views/cart/Cart';
+import Cart from '../views/orders/Cart';
+import PaymentSuccess from '../views/orders/PaymentSuccess';
 
 export default function index() {
     return (
@@ -23,6 +24,9 @@ export default function index() {
                 </Route>
                 <Route path="/your-cart">
                     <Middleware.Authenticated render={<Cart/>} />
+                </Route>
+                <Route path="/your-payment-success">
+                    <Middleware.Authenticated render={<PaymentSuccess />} />
                 </Route>
                 <Route path="/dashboard">
                     <Middleware.Authenticated render={<Dashboard/>} />

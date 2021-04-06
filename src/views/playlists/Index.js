@@ -7,25 +7,34 @@ import App from '../../layouts/App'
 export default function Index() {
     const [playlists, setPlaylists] = useState([]);
     const [links, setLinks] = useState([]);
-    const [url, setUrl] = useState('/api/playlists')
+    const [url, setUrl] = useState('/api/playlists');
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         let isMounted = true; // note this flag denote mount status
         const getPlaylists = async () => {
+            setLoading(true)
             try {
                 let { data } = await axios.get(url)
                 if (isMounted) {
                     setPlaylists(data.data)
                     setLinks(data.meta.links)
+                    setLoading(false)
                 };
             } catch (error) {
                 console.log(error);
+                setLoading(false)
             }
         }
 
         getPlaylists()
         return () => (isMounted = false); // use effect cleanup to set flag false
     }, [url]);
+
+    const spinner = <div className="d-flex align-items-center">
+        <strong>Loading...</strong>
+        <div className="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+    </div>;
     return (
         <App title="Series">
             <Header title="All Series">
@@ -34,6 +43,7 @@ export default function Index() {
 
             <div className="container">
                 <div className="row">
+                    {loading && spinner}
                     {playlists &&
                         playlists.map((playlist, index) => (
                             <div className="col-md-4 mb-3" key={index}>

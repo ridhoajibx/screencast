@@ -11,18 +11,24 @@ const Register = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
     const [password_confirmation, setPasswordConfirmation] = useState('')
+    const [errors, setErrors] = useState([])
 
     const setAuth = useSetRecoilState(authenticatedUser);
     let credentials = { name, email, password, password_confirmation }
 
-    const submitHandler = async(e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
-        let {data} = await axios.post('/register', credentials)
-        setAuth({
-            user: data.user,
-            check:true
-        })
-        history.push('/dashboard')
+        try {
+            let { data } = await axios.post('/register', credentials)
+            setAuth({
+                user: data.user,
+                check: true
+            })
+            history.push('/dashboard')
+        } catch ({ response }) {
+            setErrors(response.data.errors);
+            console.log(response.data)
+        }
     }
     return (
         <App title="Register">
@@ -35,16 +41,31 @@ const Register = (props) => {
                                 <div className="mb-3">
                                     <label className="form-label" htmlFor="name">Name</label>
                                     <input value={name} onChange={(e) => setName(e.target.value)} type="text" name="name" id="name" className="form-control" />
+                                    { errors.name && errors.name.map((error, i) =>(
+                                        <div className="text-danger mt-1" key={i}>
+                                            {error}
+                                        </div>
+                                    )) }
                                 </div>
 
                                 <div className="mb-3">
                                     <label className="form-label" htmlFor="email">Email</label>
                                     <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className="form-control" />
+                                    { errors.email && errors.email.map((error, i) =>(
+                                        <div className="text-danger mt-1" key={i}>
+                                            {error}
+                                        </div>
+                                    )) }
                                 </div>
 
                                 <div className="mb-3">
                                     <label className="form-label" htmlFor="password">Password</label>
                                     <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" className="form-control" />
+                                    { errors.password && errors.password.map((error, i) =>(
+                                        <div className="text-danger mt-1" key={i}>
+                                            {error}
+                                        </div>
+                                    )) }
                                 </div>
 
                                 <div className="mb-3">

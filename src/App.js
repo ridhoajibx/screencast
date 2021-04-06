@@ -2,11 +2,12 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import ReactRouter from './routes'
-import { authenticatedUser } from './store';
+import { aNumberOfCart, authenticatedUser } from './store';
 
 function App() {
     const [loading, setLoading] = useState(false);
     const setAuth = useSetRecoilState(authenticatedUser);
+    const setANumberOfCart = useSetRecoilState(aNumberOfCart)
 
     useEffect(() => {
         const getUser = async () => {
@@ -20,7 +21,13 @@ function App() {
                 setLoading(false)
             }
         }
+
+        const getANumberOfCart = async()=> {
+           let { data } = await axios.get('/api/carts')
+           setANumberOfCart(data.data)
+        }
         getUser();
+        getANumberOfCart();
     }, [setAuth]);
 
     const loadingPage = <div className="d-flex justify-content-center align-items-center min-vh-100">

@@ -9,4 +9,9 @@ const authenticatedUser = atom({
     },
 });
 
-export { authenticatedUser }
+const aNumberOfCart = atom({
+    key: "aNumberOfCart",
+    default: []
+});
+
+export { authenticatedUser, aNumberOfCart }

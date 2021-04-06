@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = (props) => {
     return (
-        <div className="bg-light py-4 mt-2 mb-5 shadow-sm">
+        <div className="bg-light py-4 mb-5 shadow-sm">
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">

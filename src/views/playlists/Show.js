@@ -4,8 +4,11 @@ import { useParams } from 'react-router'
 import Header from '../../components/Header';
 import App from '../../layouts/App';
 import { ToastContainer, toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
+import { aNumberOfCart } from '../../store';
 
 export default function Show() {
+    const setANumberOfCart = useSetRecoilState(aNumberOfCart);
     const { slug } = useParams();
     const [playlist, setPlaylist] = useState([]);
     const [lessons, setLessons] = useState([]);
@@ -13,24 +16,13 @@ export default function Show() {
     const addToCartHandler = async () => {
         try {
             let response = await axios.post(`/api/add-to-cart/${playlist.slug}`)
-            toast.dark(response.data.message, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
+            toast(`🚀 ${response.data.message}`, {
+                position: "top-right"
             });
+            setANumberOfCart(cart => [...cart, playlist]);
         } catch ({ response }) {
-            toast.error(response.data.message, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
+            toast(`🚀 ${response.data.message}`, {
+                position: "top-right"
             });
         }
     }
@@ -56,29 +48,31 @@ export default function Show() {
             <Header title={playlist.name}>
                 <div>{playlist.description}</div>
                 <div className="mt-4">
-                    <button className="btn btn-secondary me-2">Watch trailer</button>
-                    <button onClick={addToCartHandler} className="btn btn-primary">Add to cart</button>
+                    <button className="btn btn-danger me-2"><i className="bi bi-youtube"></i> Watch trailer</button>
+                    <button onClick={addToCartHandler} className="btn btn-primary"><i className="bi bi-cart3 me-2"></i>Add to cart</button>
                 </div>
             </Header>
             <div className="container">
                 <div className="row">
                     <div className="col-md-8">
-                        <div className="card" style={{ marginTop: -80 }}>
-                            <div className="card-header bg-white border-bottom py-3">
-                                {playlist.name}
+                        <div className="card shadow-lg" style={{ marginTop: -80 }}>
+                            <div className="card-header bg-white border-bottom py-4">
+                                <div className="fs-5 fw-bold px-3 d-flex align-items-center"><i className="bi bi-collection-play me-2 fs-2"></i> {playlist.name}</div>
                             </div>
-                            <div className="card-body">
-                                <ol className="m-0 ps-3">
-                                    {lessons.map((lesson, index) => (
-                                        <li key={index} className="my-2">
-                                            <a href="#" className="text-decoration-none text-dark">
+                            <ul className="list-group list-group-flush">
+                                {lessons.map((lesson, index) => (
+                                    <li key={index} className="list-group-item">
+                                        <a href="#" className="text-decoration-none text-dark d-flex align-items-center px-3">
+                                            <i className="bi bi-play-circle-fill fs-2"></i>
+                                            <div className="ms-4">
                                                 {lesson.title}
-                                            </a>
-                                        </li>
-                                    ))
-                                    }
-                                </ol>
-                            </div>
+                                                <div style={{ fontSize: "13px" }} className="fw-medium text-secondary">Episode {lesson.episode}</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                ))
+                                }
+                            </ul>
                         </div>
                     </div>
                 </div>

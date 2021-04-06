@@ -2,12 +2,13 @@ import axios from 'axios';
 import React from 'react'
 import { useHistory } from 'react-router';
 import { NavLink } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { authenticatedUser } from '../store';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { aNumberOfCart, authenticatedUser } from '../store';
 
 export default function Navigation() {
     const history = useHistory()
     const [auth, setAuth] = useRecoilState(authenticatedUser);
+    const carts = useRecoilValue(aNumberOfCart);
 
     const logoutHandler = async (e) => {
         e.preventDefault();
@@ -44,6 +45,12 @@ export default function Navigation() {
 
                     {auth.check ?
                         <ul className="navbar-nav mb-2 mb-lg-0">
+                            <li className="nav-item">
+                                <a href="#" className="nav-link d-flex align-items-center">
+                                    <i className="bi bi-cart3 me-1" />
+                                    <span className="badge bg-secondary rounded-pill"> {carts.length} </span>
+                                </a>
+                            </li>
                             <li className="nav-item dropdown">
                                 <div className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     {auth.user.name}

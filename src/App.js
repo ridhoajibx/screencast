@@ -14,7 +14,6 @@ function App() {
             try {
                 const { data } = await axios.get(`/api/me`);
                 setAuth({ user: data.data, check: true });
-                console.log(data.data);
                 setLoading(false)
             } catch (error) {
                 console.log("You're not login!");

@@ -15,14 +15,16 @@ export default function Show() {
 
     const addToCartHandler = async () => {
         try {
-            let response = await axios.post(`/api/add-to-cart/${playlist.slug}`)
-            toast(`🚀 ${response.data.message}`, {
-                position: "top-right"
+            let {data} = await axios.post(`/api/add-to-cart/${playlist.slug}`)
+            toast(`🚀 ${data.message}`, {
+                position: "top-right",
+                autoClose: 3000,
             });
-            setANumberOfCart(cart => [...cart, playlist]);
-        } catch ({ response }) {
-            toast(`🚀 ${response.data.message}`, {
-                position: "top-right"
+            setANumberOfCart(cart => [...cart, data.data]);
+        } catch ({ data }) {
+            toast(`🚀 ${data.message}`, {
+                position: "top-right",
+                autoClose: 3000,
             });
         }
     }
@@ -57,7 +59,7 @@ export default function Show() {
                     <div className="col-md-8">
                         <div className="card shadow-lg" style={{ marginTop: -80 }}>
                             <div className="card-header bg-white border-bottom py-4">
-                                <div className="fs-5 fw-bold px-3 d-flex align-items-center"><i className="bi bi-collection-play me-2 fs-2"></i> {playlist.name}</div>
+                                <div className="fs-5 fw-bold px-3 d-flex align-items-center text-capitalize"><i className="bi bi-collection-play me-4 fs-2"></i> {playlist.name}</div>
                             </div>
                             <ul className="list-group list-group-flush">
                                 {lessons.map((lesson, index) => (

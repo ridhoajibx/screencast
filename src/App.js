@@ -5,20 +5,20 @@ import ReactRouter from './routes'
 import { aNumberOfCart, authenticatedUser } from './store';
 
 function App() {
-    const [loading, setLoading] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
     const setAuth = useSetRecoilState(authenticatedUser);
     const setANumberOfCart = useSetRecoilState(aNumberOfCart)
 
     useEffect(() => {
         const getUser = async () => {
-            setLoading(true)
+            setIsMounted(false)
             try {
                 const { data } = await axios.get(`/api/me`);
                 setAuth({ user: data.data, check: true });
-                setLoading(false)
+                setIsMounted(true)
             } catch (error) {
                 console.log("You're not login!");
-                setLoading(false)
+                setIsMounted(true)
             }
         }
 
@@ -28,7 +28,7 @@ function App() {
         }
         getUser();
         getANumberOfCart();
-    }, [setAuth]);
+    }, [setAuth, setANumberOfCart]);
 
     const loadingPage = <div className="d-flex justify-content-center align-items-center min-vh-100">
         <div className="spinner-border" role="status">
@@ -38,7 +38,7 @@ function App() {
 
     return (
         <div>
-            { loading ?
+            { !isMounted ?
                 loadingPage
                 :
                 <ReactRouter />

@@ -46,10 +46,10 @@ export default function Navigation() {
                     {auth.check ?
                         <ul className="navbar-nav mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <a href="#" className="nav-link d-flex align-items-center">
+                                <NavLink to="/your-cart" className="nav-link d-flex align-items-center">
                                     <i className="bi bi-cart3 me-1" />
                                     <span className="badge bg-secondary rounded-pill"> {carts.length} </span>
-                                </a>
+                                </NavLink>
                             </li>
                             <li className="nav-item dropdown">
                                 <div className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

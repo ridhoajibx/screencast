@@ -6,6 +6,7 @@ import Dashboard from '../views/Dashboard';
 import Home from '../views/Home';
 import * as Middleware from '../middleware';
 import * as Series from '../views/playlists/App';
+import Cart from '../views/cart/Cart';
 
 export default function index() {
     return (
@@ -19,6 +20,9 @@ export default function index() {
                 </Route>
                 <Route path="/register">
                     <Middleware.Guest render={<Register/>} />
+                </Route>
+                <Route path="/your-cart">
+                    <Middleware.Authenticated render={<Cart/>} />
                 </Route>
                 <Route path="/dashboard">
                     <Middleware.Authenticated render={<Dashboard/>} />

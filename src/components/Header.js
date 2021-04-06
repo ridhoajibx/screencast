@@ -6,7 +6,7 @@ const Header = (props) => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">
-                        <h3>{props.title}</h3>
+                        <h3 className="text-capitalize">{props.title}</h3>
                         <hr className="dropdown-divider" style={{ width: "10%", height: '5px' }} />
                         <div className="text-secondary mb-4">
                             {props.children}

@@ -6,6 +6,7 @@ import App from '../../layouts/App'
 import { aNumberOfCart } from '../../store'
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom'
+import { formatMoney } from '../../variables'
 
 export default function Cart() {
     const [carts, setCarts] = useRecoilState(aNumberOfCart);
@@ -64,7 +65,7 @@ export default function Cart() {
                                                 <tr key={index}>
                                                     <th scope="row">{index + 1}</th>
                                                     <td>{cart.playlist.name}</td>
-                                                    <td className="text-end">Rp {cart.price}</td>
+                                                    <td className="text-end">Rp { formatMoney(cart.price) }</td>
                                                     <td className="text-end">
                                                         <button onClick={() => { removeCartHandler(index) }} className="btn btn-danger btn-sm">Remove</button>
                                                     </td>
@@ -73,7 +74,7 @@ export default function Cart() {
                                             }
                                             <tr>
                                                 <td colSpan="2"></td>
-                                                <th className="text-end" scope="row">Rp {total}</th>
+                                                <th className="text-end" scope="row">Rp {formatMoney(total)}</th>
                                                 <td className="text-end">
                                                     <button className="btn btn-primary btn-sm">Checkout</button>
                                                 </td>

@@ -6,6 +6,7 @@ import Dashboard from '../views/Dashboard';
 import Home from '../views/Home';
 import * as Middleware from '../middleware';
 import * as Series from '../views/playlists/App';
+import * as Lessons from '../views/lessons/App';
 import Cart from '../views/orders/Cart';
 import PaymentSuccess from '../views/orders/PaymentSuccess';
 
@@ -15,7 +16,8 @@ export default function index() {
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/series" component={Series.Index} />
-                <Route path="/series/:slug" component={Series.Show} />
+                <Route exact path="/series/:slug" component={Series.Show} />
+                <Route path="/series/:slug/:episode" component={Lessons.Show} />
                 <Route path="/login">
                     <Middleware.Guest render={<Login/>} />
                 </Route>

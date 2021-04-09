@@ -2,7 +2,7 @@
   "name": "screencast",
   "version": "0.1.0",
   "private": true,
-  "homepage":"https://screencast-rust.vercel.app",
+  "homepage": "https://screencast-rust.vercel.app",
   "dependencies": {
     "@popperjs/core": "^2.9.2",
     "@testing-library/jest-dom": "^5.11.4",
@@ -16,6 +16,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-toastify": "^7.0.3",
+    "react-youtube": "^7.13.1",
     "recoil": "^0.2.0",
     "web-vitals": "^1.0.1"
   },

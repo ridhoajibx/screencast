@@ -13,6 +13,7 @@ export default function Show() {
     const [playlist, setPlaylist] = useState([]);
     const [lessons, setLessons] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [hasBought, setHasBought] = useState(false);
 
     const addToCartHandler = async () => {
         try {
@@ -36,6 +37,8 @@ export default function Show() {
             setLoading(true)
             try {
                 let { data } = await axios.get(url)
+                console.log(data);
+
                 if (isMounted) {
                     set(data.data)
                     setLoading(false)
@@ -47,6 +50,7 @@ export default function Show() {
         }
         getApiData(`/api/playlists/${slug}`, setPlaylist);
         getApiData(`/api/playlists/${slug}/videos`, setLessons);
+        getApiData(`/api/check-if-user-hasbought-${slug}`, setHasBought);
         return () => { isMounted = false }
     }, [slug]);
 
@@ -62,12 +66,14 @@ export default function Show() {
                 <div>{playlist.description}</div>
                 <div className="mt-4">
                     <button className="btn btn-danger me-2"><i className="bi bi-youtube"></i> Watch trailer</button>
-                    <button onClick={addToCartHandler} className="btn btn-primary"><i className="bi bi-cart3 me-2"></i>Add to cart</button>
+                    {!hasBought &&
+                        <button onClick={addToCartHandler} className="btn btn-primary"><i className="bi bi-cart3 me-2"></i>Add to cart</button>
+                    }
                 </div>
             </Header>
             <div className="container">
                 <div className="row">
-                    { loading && spinner }
+                    {loading && spinner}
                     {lessons.length > 0 && !loading &&
                         <div className="col-md-8">
                             <div className="card shadow-lg" style={{ marginTop: -70 }}>

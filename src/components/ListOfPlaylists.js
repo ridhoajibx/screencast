@@ -13,8 +13,6 @@ export default function ListOfPlaylists({ slug }) {
         getLessons();
     }, [slug]);
 
-    console.log(lessons);
-
     return (
         <div>
             {lessons.map((lesson, index) => (

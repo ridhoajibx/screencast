@@ -1,18 +1,6 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
 
-export default function ListOfPlaylists({ slug }) {
-    const [lessons, setLessons] = useState([]);
-
-    useEffect(() => {
-        const getLessons = async () => {
-            const { data } = await axios.get(`/api/playlists/${slug}/videos`);
-            setLessons(data.data);
-        }
-        getLessons();
-    }, [slug]);
-
+export default function ListOfPlaylists({ lessons, slug }) {
     return (
         <div>
             {lessons.map((lesson, index) => (

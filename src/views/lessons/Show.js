@@ -4,23 +4,19 @@ import App from '../../layouts/App';
 import YouTube from 'react-youtube';
 import axios from 'axios';
 import ListOfPlaylists from '../../components/ListOfPlaylists';
+import usePlaylist from '../../customHooks/usePlaylist';
 
 const Show = () => {
-    const [lesson, setLesson] = useState([]);
-    const [playlist, setPlaylist] = useState([]);
-    const [hasBought, setHasBought] = useState(false);
-    const [errorScreen, setErrorScreen] = useState(false);
-
     const { slug, episode } = useParams();
+    const [lesson, setLesson] = useState([]);
+    const [errorScreen, setErrorScreen] = useState(false);
+    const { playlist, lessons, hasBought } = usePlaylist(slug)
 
     useEffect(() => {
         const getLesson = async () => {
             try {
                 const lessonResponse = await axios.get(`api/playlists/${slug}/${episode}`)
-                const hasBoughtResponse = await axios.get(`/api/check-if-user-hasbought-${lessonResponse.data.playlist.slug}`)
                 setLesson(lessonResponse.data.data)
-                setPlaylist(lessonResponse.data.playlist);
-                setHasBought(hasBoughtResponse.data.data);
             } catch (e) {
                 setErrorScreen(true);
             }
@@ -31,9 +27,8 @@ const Show = () => {
         console.log('Ready to play');
     }
 
-    console.log(errorScreen);
     return (
-        <App title={`series-${slug}-episode ${episode}`}>
+        <App title={lesson.title}>
             <div className="bg-dark mb-5">
                 {hasBought && !errorScreen &&
                     <div className="container">
@@ -69,7 +64,7 @@ const Show = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">
-                        <ListOfPlaylists slug={playlist.slug} />
+                        <ListOfPlaylists lessons={lessons} slug={playlist.slug} />
                     </div>
                 </div>
             </div>

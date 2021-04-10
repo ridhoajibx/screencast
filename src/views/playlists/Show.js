@@ -1,5 +1,4 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import Header from '../../components/Header';
 import App from '../../layouts/App';
@@ -8,12 +7,12 @@ import { useSetRecoilState } from 'recoil';
 import { aNumberOfCart } from '../../store';
 import { Link } from 'react-router-dom';
 import ListOfPlaylists from '../../components/ListOfPlaylists';
+import usePlaylist from '../../customHooks/usePlaylist';
 
 export default function Show() {
     const setANumberOfCart = useSetRecoilState(aNumberOfCart);
     const { slug } = useParams();
-    const [playlist, setPlaylist] = useState([]);
-    const [hasBought, setHasBought] = useState(false);
+    const { playlist, lessons, hasBought } = usePlaylist(slug);
 
     const addToCartHandler = async () => {
         try {
@@ -30,25 +29,6 @@ export default function Show() {
             });
         }
     }
-
-    useEffect(() => {
-        let isMounted = true;
-        const getApiData = async (url, set) => {
-            try {
-                let { data } = await axios.get(url)
-                console.log(data);
-
-                if (isMounted) {
-                    set(data.data)
-                };
-            } catch ({ response }) {
-                console.log(response.statusText);
-            }
-        }
-        getApiData(`/api/playlists/${slug}`, setPlaylist);
-        getApiData(`/api/check-if-user-hasbought-${slug}`, setHasBought);
-        return () => { isMounted = false }
-    }, [slug]);
 
     return (
         <App title="Show">
@@ -72,7 +52,7 @@ export default function Show() {
                                 </div>
                             </div>
                             <ul className="list-group list-group-flush">
-                                <ListOfPlaylists slug={playlist.slug} />
+                                <ListOfPlaylists lessons={lessons} slug={playlist.slug} />
                             </ul>
                         </div>
                     </div>
